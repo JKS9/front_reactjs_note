@@ -1,6 +1,7 @@
 import {Box} from '@mui/material';
+import {IComponentsBox} from '../../../types/components/interfaceComponents';
 
-const ComponentsBox = (props: any) => {
+const ComponentsBox = (props: IComponentsBox) => {
   return (
     <Box
       sx={{

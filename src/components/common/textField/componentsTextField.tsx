@@ -1,6 +1,7 @@
 import {TextField} from '@mui/material';
+import {IComponentsTextField} from '../../../types/components/interfaceComponents';
 
-const ComponentsTextField = (props: any) => {
+const ComponentsTextField = (props: IComponentsTextField) => {
   return (
     <TextField
       error={props.error}

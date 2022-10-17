@@ -1,9 +1,9 @@
 import {REGEX_EMAIL, REGEX_PASSWORD} from '../../constants/regex/regex';
 
 export const ValidateEmail = (email: string) => {
-  const validateEmailRegex = REGEX_EMAIL;
+  const validateEmailRegex: RegExp = REGEX_EMAIL;
 
-  const value = validateEmailRegex.test(email);
+  const value: boolean = validateEmailRegex.test(email);
   if (!value) {
     return false;
   }
@@ -12,9 +12,9 @@ export const ValidateEmail = (email: string) => {
 };
 
 export const ValidatePassword = (password: string) => {
-  const validatePasswordRegex = REGEX_PASSWORD;
+  const validatePasswordRegex: RegExp = REGEX_PASSWORD;
 
-  const value = validatePasswordRegex.test(password);
+  const value: boolean = validatePasswordRegex.test(password);
   if (!value) {
     return false;
   }

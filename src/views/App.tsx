@@ -12,7 +12,7 @@ const App = () => {
   const [logging, setLogging] = useState<boolean>(false);
 
   useEffect(() => {
-    let authToken = sessionStorage.getItem('Auth Token');
+    let authToken: string | null = sessionStorage.getItem('Auth Token');
 
     if (authToken) {
       setLogging(true);

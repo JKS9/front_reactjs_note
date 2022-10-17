@@ -1,6 +1,7 @@
 import {Button} from '@mui/material';
+import {IComponentsButton} from '../../../types/components/interfaceComponents';
 
-const ComponentsButton = (props: any) => {
+const ComponentsButton = (props: IComponentsButton) => {
   return (
     <div className='ButtonCentered'>
       <Button

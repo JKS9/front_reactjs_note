@@ -1,6 +1,7 @@
 import {Typography} from '@mui/material';
+import {IComponentsTypography} from '../../../types/components/interfaceComponents';
 
-const ComponentsTypography = (props: any) => {
+const ComponentsTypography = (props: IComponentsTypography) => {
   return (
     <Typography
       variant={props.variant}
