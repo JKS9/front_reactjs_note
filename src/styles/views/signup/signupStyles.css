@@ -1,0 +1,15 @@
+.ButtonCentered {
+  width: 100%;
+  margin: 1.5em 0em 0em 0em;
+  text-align: center;
+}
+
+.line {
+  text-decoration: underline;
+}
+
+.connection {
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  font-size: 1em;
+}
