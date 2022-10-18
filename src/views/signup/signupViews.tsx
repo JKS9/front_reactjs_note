@@ -11,6 +11,8 @@ import {
   ValidatePassword,
 } from '../../helpers/validation/validation';
 
+import {colorError} from '../../constants/color/colors';
+
 import '../../styles/views/signup/signupStyles.css';
 
 const SignupViews = () => {
@@ -21,6 +23,9 @@ const SignupViews = () => {
 
   const [password, setPassword] = useState<string>('');
   const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const [errorSingup, setErrorSingup] = useState<boolean>(false);
+  const [errorSingupText, setErrorSingupText] = useState<string>('');
 
   const submit = () => {
     if (email && !emailError && password && !passwordError) {
@@ -71,7 +76,7 @@ const SignupViews = () => {
       <ComponentsTypography
         variant={'h4'}
         textAlign={'center'}
-        text={'Inscription'}
+        text={'Create Account'}
       />
 
       <ComponentsTextField
@@ -90,16 +95,28 @@ const SignupViews = () => {
           type: 'password',
         }}
         onChange={(e: string) => onChangePassword(e)}
+        helperText='8 characters, one capital letter, one number and one special character minimum'
       />
+
+      {errorSingup && errorSingupText ? (
+        <div className='marginError'>
+          <ComponentsTypography
+            variant={'body2'}
+            textAlign={'center'}
+            text={errorSingupText}
+            color={colorError}
+          />
+        </div>
+      ) : null}
 
       <ComponentsButton
         submit={() => submit()}
         disabled={emailError || passwordError ? true : false}
-        text={'inscription'}
+        text={'create'}
       />
 
       <div className='ButtonCentered line connection'>
-        <p onClick={handlerRedirect}>Connexion</p>
+        <p onClick={handlerRedirect}>login</p>
       </div>
     </ComponentsBox>
   );
