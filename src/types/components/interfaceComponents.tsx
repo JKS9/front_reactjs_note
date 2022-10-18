@@ -8,17 +8,18 @@ export interface IComponentsBox {
 
 export interface IComponentsButton {
   submit: () => void;
-  disabled: boolean;
+  disabled?: boolean;
   text: string;
 }
 
 export interface IComponentsTextField {
-  error: boolean;
+  error?: boolean;
   label: string;
   inputProps: {
     type: string;
   };
   onChange: (e: string) => void;
+  helperText?: string;
 }
 
 export interface IComponentsTypography {

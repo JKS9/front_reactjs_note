@@ -12,6 +12,7 @@ const ComponentsTextField = (props: IComponentsTextField) => {
       inputProps={props.inputProps}
       style={{margin: '1em 0em 0em 0em'}}
       onChange={(e) => props.onChange(e.target.value)}
+      helperText={props.helperText}
     />
   );
 };
