@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+import LoginServices from '../../services/login/loginServices';
+
 import ComponentsBox from '../../components/common/box/componentsBox';
 import ComponentsTypography from '../../components/common/typography/componentsTypography';
 import ComponentsTextField from '../../components/common/textField/componentsTextField';
@@ -25,15 +27,23 @@ const LoginViews = (props: any) => {
   const [errorLogin, setErrorLogin] = useState<boolean>(false);
   const [errorLoginText, setErrorLoginText] = useState<string>('');
 
-  const handlerLogin = () => {
-    console.log('token', email + ':' + password);
+  const handlerLogin = async () => {
+    if (email && !emailError && password && !passwordError) {
+      setErrorLogin(false);
 
-    setErrorLogin(true);
-    setErrorLoginText('Incorrect email or password');
+      const {error, message} = await LoginServices(email, password);
 
-    //sessionStorage.setItem('Auth Token', email + ':' + password);
-    //props.login();
-    //navigate('/');
+      if (error === true) {
+        setErrorLogin(true);
+        setErrorLoginText(message);
+        return;
+      }
+
+      props.login();
+      handlerRedirect();
+
+      return;
+    }
   };
 
   const handlerRedirect = () => {
