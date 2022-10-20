@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+import SignupServices from '../../services/signup/signupServices';
+
 import ComponentsBox from '../../components/common/box/componentsBox';
 import ComponentsTypography from '../../components/common/typography/componentsTypography';
 import ComponentsTextField from '../../components/common/textField/componentsTextField';
@@ -11,7 +13,7 @@ import {
   ValidatePassword,
 } from '../../helpers/validation/validation';
 
-import {colorError} from '../../constants/color/colors';
+import {colorCreate, colorError} from '../../constants/color/colors';
 
 import '../../styles/views/signup/signupStyles.css';
 
@@ -27,9 +29,25 @@ const SignupViews = () => {
   const [errorSingup, setErrorSingup] = useState<boolean>(false);
   const [errorSingupText, setErrorSingupText] = useState<string>('');
 
-  const submit = () => {
+  const [createSingup, setCreateSingup] = useState<boolean>(false);
+  const [createSingupText, setCreateSingupText] = useState<string>('');
+
+  const submit = async () => {
     if (email && !emailError && password && !passwordError) {
-      handlerRedirect();
+      setErrorSingup(false);
+      setCreateSingup(false);
+
+      const {error, message} = await SignupServices(email, password);
+
+      if (error === true) {
+        setErrorSingup(true);
+        setErrorSingupText(message);
+        return;
+      }
+
+      setCreateSingup(true);
+      setCreateSingupText(message);
+      return;
     }
   };
 
@@ -37,8 +55,8 @@ const SignupViews = () => {
     navigate('/login');
   };
 
-  const onChangeEmail = (value: string) => {
-    const regexJoi = ValidateEmail(value);
+  const onChangeEmail = async (value: string) => {
+    const regexJoi = await ValidateEmail(value);
 
     if (!regexJoi) {
       setEmailError(true);
@@ -50,8 +68,8 @@ const SignupViews = () => {
     return;
   };
 
-  const onChangePassword = (value: string) => {
-    const regexJoi = ValidatePassword(value);
+  const onChangePassword = async (value: string) => {
+    const regexJoi = await ValidatePassword(value);
 
     if (!regexJoi) {
       setPasswordError(true);
@@ -98,13 +116,24 @@ const SignupViews = () => {
         helperText='8 characters, one capital letter, one number and one special character minimum'
       />
 
-      {errorSingup && errorSingupText ? (
+      {errorSingup && errorSingupText && !createSingup ? (
         <div className='marginError'>
           <ComponentsTypography
             variant={'body2'}
             textAlign={'center'}
             text={errorSingupText}
             color={colorError}
+          />
+        </div>
+      ) : null}
+
+      {createSingup && createSingupText && !errorSingup ? (
+        <div className='marginError'>
+          <ComponentsTypography
+            variant={'body2'}
+            textAlign={'center'}
+            text={createSingupText}
+            color={colorCreate}
           />
         </div>
       ) : null}
