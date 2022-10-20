@@ -1,6 +1,6 @@
 import {REGEX_EMAIL, REGEX_PASSWORD} from '../../constants/regex/regex';
 
-export const ValidateEmail = (email: string) => {
+export const ValidateEmail = async (email: string) => {
   const validateEmailRegex: RegExp = REGEX_EMAIL;
 
   const value: boolean = validateEmailRegex.test(email);
@@ -11,7 +11,7 @@ export const ValidateEmail = (email: string) => {
   return true;
 };
 
-export const ValidatePassword = (password: string) => {
+export const ValidatePassword = async (password: string) => {
   const validatePasswordRegex: RegExp = REGEX_PASSWORD;
 
   const value: boolean = validatePasswordRegex.test(password);
