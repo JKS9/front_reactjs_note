@@ -12,9 +12,10 @@ const App = () => {
   const [logging, setLogging] = useState<boolean>(false);
 
   useEffect(() => {
-    let authToken: string | null = sessionStorage.getItem('Auth Token');
+    let accessToken: string | null = sessionStorage.getItem('accessToken');
+    let refreshToken: string | null = sessionStorage.getItem('refreshToken');
 
-    if (authToken) {
+    if (accessToken && refreshToken) {
       setLogging(true);
     } else {
       setLogging(false);
@@ -22,7 +23,8 @@ const App = () => {
   }, [logging]);
 
   const handlerLogout = () => {
-    sessionStorage.removeItem('Auth Token');
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('refreshToken');
     setLogging(false);
   };
 
