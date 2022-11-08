@@ -1,10 +1,7 @@
 import {useEffect, useState} from 'react';
-import {Routes, Route} from 'react-router-dom';
 
-import NotFoundViews from './notFound/notFoundViews';
-import SignupViews from './signup/signupViews';
-import LoginViews from './login/loginViews';
-import HomeViews from './home/homeViews';
+import Authenticate from '../routes/authenticate';
+import NotAuthenticate from '../routes/notAuthenticate';
 
 import '../styles/App.css';
 
@@ -35,32 +32,9 @@ const App = () => {
   return (
     <>
       {logging ? (
-        <Routes>
-          <Route
-            index
-            path='/'
-            element={<HomeViews logout={handlerLogout} />}
-          />
-          <Route
-            path='/*'
-            element={<NotFoundViews />}
-          />
-        </Routes>
+        <Authenticate logout={handlerLogout} />
       ) : (
-        <Routes>
-          <Route
-            path='/'
-            element={<SignupViews />}
-          />
-          <Route
-            path='/login'
-            element={<LoginViews login={handlerLogin} />}
-          />
-          <Route
-            path='/*'
-            element={<NotFoundViews />}
-          />
-        </Routes>
+        <NotAuthenticate login={handlerLogin} />
       )}
     </>
   );
